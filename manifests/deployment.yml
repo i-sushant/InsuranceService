@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: insuranceservice 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: insuranceservice
+  template:
+    metadata:
+      labels:
+        app: insuranceservice 
+    spec:
+      containers:
+        - name: insuranceservice 
+          image: ctstrainingacr.azurecr.io/insuranceservice
+          ports:
+          - containerPort: 80
