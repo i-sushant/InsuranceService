@@ -63,7 +63,7 @@ namespace InsuranceClaimMicroservice.Controllers
         public async Task<IActionResult> InitiateClaim(InitiateClaim initiateClaim)
         {
             var token = await HttpContext.GetTokenAsync("access_token");
-            if (_auditRepository.GetClaim(initiateClaim.PatientId) != null) return BadRequest("Claim already settled");
+            if (_auditRepository.GetClaim(initiateClaim.PatientId) != null) return BadRequest(new { message ="Claim already settled" });
             if (!(await ValidateClaim(initiateClaim, token))) return BadRequest();
             return Ok(await _initiateClaimService.InitiateClaim(initiateClaim, token));
         }
